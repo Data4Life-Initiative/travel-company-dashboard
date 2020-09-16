@@ -21,9 +21,17 @@ const PatientReducer = (state = initialState, action) => {
             const proofRecords = {};
             for(const data of (action.value || [])){
                 if(data.presentation && data.presentation.requested_proof.revealed_attrs["0_testdate_uuid"].raw){
+                    console.log("I am here");
                     const connectionId = data.connection_id
-                    if(proofRecords[connectionId] && proofRecords[connectionId] !== 'verified'){
-                        proofRecords[data.connection_id] = data.state
+                    proofRecords[connectionId] = proofRecords[connectionId] || {}
+                    if(proofRecords[connectionId].state !== 'verified'){
+                        proofRecords[connectionId].state = data.state
+                        proofRecords[connectionId].testDate =
+                            data.presentation.requested_proof.revealed_attrs["0_testdate_uuid"].raw
+                        proofRecords[connectionId].testResults =
+                            data.presentation.requested_proof.revealed_attrs["0_testresult_uuid"].raw
+                        proofRecords[connectionId].collectionDate =
+                            data.created_at
                     }
                 }
             }

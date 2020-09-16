@@ -48,10 +48,6 @@ export default class DashboradWrapperComponent extends React.Component {
                 >
                     <IssueCertificate onCancel={this.onClose} />
                 </Drawer>
-
-                <Button type="primary issue-certificate-button dashboard-buttons" onClick={this.showIssueCertificateDrawer}>
-                    <PlusOutlined /> Issue Credentials
-                </Button>
                 <div className="map-container site-layout-background">
                     <ConnectionTable
                         props={this.props}
