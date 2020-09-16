@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from "react";
-import { Table, Modal } from "antd";
+import { Table, Modal, Tooltip } from "antd";
 import { CheckCircleOutlined, CloseCircleOutlined, EyeOutlined } from '@ant-design/icons';
 
 export default class ConnectionTable extends React.Component {
@@ -73,9 +73,17 @@ export default class ConnectionTable extends React.Component {
         render: (value) => {
           if(proofRecords[value]){
             const date = new Date(proofRecords[value]['collectionDate']);
-            return date.toLocaleDateString();
+            return date.toLocaleString();
           }
           return 'Unknown';
+        },
+        sorter: {
+          compare: (a, b) => {
+            const dateA = new Date(proofRecords[a.ConnectionID]['collectionDate']);
+            const dateB = new Date(proofRecords[b.ConnectionID]['collectionDate']);
+            return dateA - dateB;
+          },
+          multiple: 3,
         },
       },
       {
@@ -84,10 +92,10 @@ export default class ConnectionTable extends React.Component {
         key: 'state',
         render: (value) => {
           if(proofRecords[value]['state'] === 'verified'){
-            return <CheckCircleOutlined style={{ color: 'green'}}/>
+            return <Tooltip title="Verified"><CheckCircleOutlined style={{ color: 'green'}}/></Tooltip>
           }
           else{
-            return <CloseCircleOutlined style={{ color: 'red'}}/>
+            return <Tooltip title="Tampered"><CloseCircleOutlined style={{ color: 'red'}}/></Tooltip>
           }
         },
       },
