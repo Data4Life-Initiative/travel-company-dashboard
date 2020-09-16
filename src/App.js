@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-function App() {
+import "./App.css";
+
+import { DashboradWrapperContainer } from "./containers/dashboard_wrapper_container";
+
+import { AdminLoginContainer, RegistrationContainer } from "./containers";
+
+const App = (props, e) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/" component={AdminLoginContainer} />
+      <Route
+        exact
+        path="/admin-dashboard"
+        component={DashboradWrapperContainer}
+      />
+      <Route exact path="/registration" component={RegistrationContainer} />
+    </Switch>
   );
-}
-
+};
 export default App;
