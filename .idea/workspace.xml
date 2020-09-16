@@ -12,7 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="48ffecaa-2b65-4222-af85-f3af2225ab7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/connection_table/ConnectionTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/connection_table/ConnectionTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shared/admin-layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shared/admin-layout.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +50,7 @@
       <updated>1600169534527</updated>
       <workItem from="1600169535563" duration="881000" />
       <workItem from="1600190065100" duration="1574000" />
-      <workItem from="1600233470876" duration="8424000" />
+      <workItem from="1600233470876" duration="8844000" />
     </task>
     <servers />
   </component>
@@ -69,10 +70,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="205" width="598" height="490" key="find.popup" timestamp="1600268027567">
+    <state x="421" y="205" width="598" height="490" key="find.popup" timestamp="1600271466149">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="421" y="205" width="598" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1600268027567" />
+    <state x="421" y="205" width="598" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1600271466149" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1600267463840">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

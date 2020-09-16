@@ -42,7 +42,7 @@ const AdminLayoutComponent = (props, e) => {
                     }}
                     className="custom-left"
                 >
-                    TRAVEL
+                    TRAVEL COMPANY
                 </Text>
                 <Text
                     style={{
