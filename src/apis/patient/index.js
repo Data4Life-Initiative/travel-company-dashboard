@@ -34,5 +34,5 @@ export function Addpatient(payload) {
 }
 
 export function getConnections(payload) {
-  return axiosInstance.get("connections/", payload);
+  return connectionEndpointInstance.get("", payload);
 }

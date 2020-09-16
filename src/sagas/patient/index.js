@@ -39,15 +39,14 @@ function* GetPatientConnections(action) {
 
     yield put({
       type: patientActionTypes.savePatientConnections,
-      value: responseData.data.data.connections || responseData.data || [{ error: responseData.data.data }],
+      value: responseData.data || [{ error: responseData.data.data }],
     });
   } catch (ex) {
-    message.error(ex.response.data.data.msg);
     yield put({
       type: patientActionTypes.getPatientConnectionsFailure,
-      value: ex.response.data.data.msg,
+      value: ex,
     });
-    console.log(ex.response);
+    console.log(ex);
   }
 }
 
