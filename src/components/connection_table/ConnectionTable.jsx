@@ -32,11 +32,12 @@ export default class ConnectionTable extends React.Component {
 
     const columns = [
       {
-        title: 'Agent Name',
+        title: 'Shared by',
         dataIndex: 'ConnectionID',
         key: 'ConnectionID',
         render: (value) => {
-          const temp = connections.filter(agent => agent.ConnectionID === value);
+          const connectionID = proofRecords[value]['connectionID']
+          const temp = connections.filter(agent => agent.ConnectionID === connectionID);
           if (temp.length > 0){
             return temp[0].Name
           }

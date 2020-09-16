@@ -21,17 +21,18 @@ const PatientReducer = (state = initialState, action) => {
             const proofRecords = {};
             for(const data of (action.value || [])){
                 if(data.presentation && data.presentation.requested_proof.revealed_attrs["0_testdate_uuid"].raw){
-                    const connectionId = data.connection_id
-                    proofRecords[connectionId] = proofRecords[connectionId] || {}
-                    if(proofRecords[connectionId].state !== 'verified'){
-                        proofRecords[connectionId].state = data.state
-                        proofRecords[connectionId].testDate =
+                    const connectionIdUnique = data.connection_id + Math.random()
+                    proofRecords[connectionIdUnique] = proofRecords[connectionIdUnique] || {}
+                    if(proofRecords[connectionIdUnique].state !== 'verified'){
+                        proofRecords[connectionIdUnique].state = data.state
+                        proofRecords[connectionIdUnique].testDate =
                             data.presentation.requested_proof.revealed_attrs["0_testdate_uuid"].raw
-                        proofRecords[connectionId].testResults =
+                        proofRecords[connectionIdUnique].testResults =
                             data.presentation.requested_proof.revealed_attrs["0_testresult_uuid"].raw
-                        proofRecords[connectionId].collectionDate =
+                        proofRecords[connectionIdUnique].collectionDate =
                             data.created_at
-                        proofRecords[connectionId].rawInfo = data;
+                        proofRecords[connectionIdUnique].rawInfo = data;
+                        proofRecords[connectionIdUnique].connectionID = data.connection_id ;
                     }
                 }
             }
