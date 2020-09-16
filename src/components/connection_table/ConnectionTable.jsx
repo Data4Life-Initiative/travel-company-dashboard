@@ -79,12 +79,16 @@ export default class ConnectionTable extends React.Component {
         },
         sorter: {
           compare: (a, b) => {
-            const dateA = new Date(proofRecords[a.ConnectionID]['collectionDate']);
-            const dateB = new Date(proofRecords[b.ConnectionID]['collectionDate']);
-            return dateA - dateB;
+            if(proofRecords[a.ConnectionID] && proofRecords[b.ConnectionID]){
+              const dateA = new Date(proofRecords[a.ConnectionID]['collectionDate']);
+              const dateB = new Date(proofRecords[b.ConnectionID]['collectionDate']);
+              return dateA - dateB;
+            }
+            return true;
           },
           multiple: 3,
         },
+        defaultSortOrder: "descend"
       },
       {
         title: 'State',
@@ -112,7 +116,7 @@ export default class ConnectionTable extends React.Component {
       },
     ];
     return (<div>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns}/>
       <Modal
           title="Raw JSON"
           visible={this.state.visible}
