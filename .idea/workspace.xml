@@ -12,10 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="48ffecaa-2b65-4222-af85-f3af2225ab7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apis/aries/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/aries/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/connection_table/ConnectionTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/connection_table/ConnectionTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dashboard_wrapper_component/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard_wrapper_component/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/patient/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/patient/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
       <updated>1600169534527</updated>
       <workItem from="1600169535563" duration="881000" />
       <workItem from="1600190065100" duration="1574000" />
-      <workItem from="1600233470876" duration="4466000" />
+      <workItem from="1600233470876" duration="5555000" />
     </task>
     <servers />
   </component>

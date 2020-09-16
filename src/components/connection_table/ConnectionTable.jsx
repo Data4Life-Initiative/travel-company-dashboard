@@ -1,28 +1,15 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table } from "antd";
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+
 
 const ConnectionTable = (props) => {
 
   const {connections=[], proofRecords={}} = props.props.patient;
-  const dataSource = connections;
+  const dataSource = Object.keys(proofRecords).map(key => { return {'ConnectionID': key} });
 
   const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'Name',
-      key: 'Name',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'Email',
-      key: 'Email',
-    },
-    {
-      title: 'Phone Number',
-      dataIndex: 'PhoneNumber',
-      key: 'PhoneNumber',
-    },
     {
       title: 'Test Date',
       dataIndex: 'ConnectionID',
@@ -40,7 +27,7 @@ const ConnectionTable = (props) => {
       key: 'testResult',
       render: (value) => {
         if(proofRecords[value]){
-          return proofRecords[value]['testResult']
+          return proofRecords[value]['testResults']
         }
         return 'Unknown';
       },
@@ -61,10 +48,12 @@ const ConnectionTable = (props) => {
       dataIndex: 'ConnectionID',
       key: 'state',
       render: (value) => {
-        if(proofRecords[value]){
-          return proofRecords[value]['state']
+        if(proofRecords[value]['state'] === 'verified'){
+          return <CheckCircleOutlined style={{ color: 'green'}}/>
         }
-        return 'Unknown';
+        else{
+          return <CloseCircleOutlined style={{ color: 'red'}}/>
+        }
       },
     },
   ];

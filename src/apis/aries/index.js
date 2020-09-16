@@ -46,5 +46,5 @@ export function getCertificateRequestStatus(payload) {
 }
 
 export function getPresentProofRecord (payload) {
-   return ariesAxiosInstance.get('present-proof/records');
+   return ariesAxiosInstance.get('present-proof/records?state=verified');
 }
