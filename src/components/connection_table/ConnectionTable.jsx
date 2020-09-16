@@ -11,6 +11,14 @@ const ConnectionTable = (props) => {
 
   const columns = [
     {
+      title: 'Connection ID',
+      dataIndex: 'ConnectionID',
+      key: 'ConnectionID',
+      render: (value) => {
+        return value;
+      },
+    },
+    {
       title: 'Test Date',
       dataIndex: 'ConnectionID',
       key: 'testDate',
