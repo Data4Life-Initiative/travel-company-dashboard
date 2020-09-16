@@ -30,3 +30,10 @@ export const savePatientConnections = (payload) => {
         payload: payload,
     };
 };
+
+export const getPresentProofRecords = (payload) => {
+    return {
+        type: patientActionTypes.getPresentProofRecords,
+        payload
+    }
+}

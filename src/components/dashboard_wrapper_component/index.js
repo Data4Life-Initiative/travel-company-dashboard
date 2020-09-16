@@ -32,6 +32,7 @@ export default class DashboradWrapperComponent extends React.Component {
 
     componentDidMount() {
         this.props.getPatientConnections();
+        this.props.getPresentProofRecords();
     }
 
     render() {

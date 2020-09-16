@@ -23,7 +23,8 @@ export {
   addPatientStart,
   addPatientSuccessfuly,
   getPatientConnections,
-  savePatientConnections
+  savePatientConnections,
+    getPresentProofRecords
 } from "./patient";
 
 export {

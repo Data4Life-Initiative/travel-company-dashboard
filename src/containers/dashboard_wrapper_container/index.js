@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import { getHotspotData, getPatientConnections } from "../../actions";
+import { getHotspotData, getPatientConnections, getPresentProofRecords } from "../../actions";
 
 import DashboradWrapperComponent from "../../components/dashboard_wrapper_component";
-const mapDipatchToSprops = { getHotspotData, getPatientConnections };
+const mapDipatchToSprops = { getHotspotData, getPatientConnections, getPresentProofRecords };
 function mapStateToProps(state) {
   return {
     dashboardData: state.data.auth,

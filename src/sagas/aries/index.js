@@ -1,6 +1,6 @@
 import { call, put, takeLatest, all } from "redux-saga/effects";
-import { ariesActionTypes } from "../../actions_types";
-import { getSchemaFromAries ,getSchemaDetailFromAries, sendOffer, getCertificateRequestStatus} from "../../apis";
+import { ariesActionTypes, patientActionTypes } from "../../actions_types";
+import { getSchemaFromAries ,getSchemaDetailFromAries, sendOffer, getCertificateRequestStatus, getPresentProofRecord} from "../../apis";
 
 function* GetSchemaFromAries(action) {
   try {
@@ -87,7 +87,28 @@ export function* getCertificateRequestStatusAction() {
   yield takeLatest(ariesActionTypes.getCertificateRequestStatus, GetCertificateRequestStatus);
 }
 
+function* GetPresentProofRecord(action) {
+  try {
+    const responseData = yield call(getPresentProofRecord, action.payload);
+
+    yield put({
+      type: patientActionTypes.savePresentProofRecords,
+      value: responseData.data.results || [{ error: responseData.data }],
+    });
+  } catch (ex) {
+    yield put({
+      type: patientActionTypes.getPresentProofRecordsFailure,
+      value: ex.response,
+    });
+    console.log(ex.response);
+  }
+}
+
+export function* getPresentProofRecordFromAries() {
+  yield takeLatest(patientActionTypes.getPresentProofRecords, GetPresentProofRecord);
+}
+
 export default function* ariesSaga() {
   yield all([getSchemaFromAriesAction(), getSchemaDetailFromAriesAction(), sendOfferAction(),
-    getCertificateRequestStatusAction()]);
+    getCertificateRequestStatusAction(), getPresentProofRecordFromAries()]);
 }

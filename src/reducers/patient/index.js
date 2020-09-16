@@ -1,6 +1,6 @@
 import { patientActionTypes } from "../../actions_types";
 const initialState = {
-    patient: { loading: false, connection_loading: false, connections: [] },
+    patient: { loading: false, connection_loading: false, connections: [], proofRecords:{} },
 };
 const PatientReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -17,6 +17,20 @@ const PatientReducer = (state = initialState, action) => {
             return { ...state, connection_loading: false, connections: [] };
         case patientActionTypes.savePatientConnections:
             return { ...state, connection_loading: true, connections: action.value };
+        case patientActionTypes.savePresentProofRecords:
+            const proofRecords = {};
+            for(const data of (action.value || [])){
+                if(data.presentation && data.presentation.requested_proof.revealed_attrs["0_testdate_uuid"].raw){
+                    const connectionId = data.connection_id
+                    if(proofRecords[connectionId] && proofRecords[connectionId] !== 'verified'){
+                        proofRecords[data.connection_id] = data.state
+                    }
+                }
+            }
+            return {
+                ...state,
+                proofRecords
+            }
         default:
             return state;
     }
