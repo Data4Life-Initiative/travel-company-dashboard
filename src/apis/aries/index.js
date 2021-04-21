@@ -1,14 +1,14 @@
 import axios from "axios";
 
 import { ariesURL, isProduction } from "../../constants";
-import { responseErrorInterceptor, requestInterceptor } from "../interceptors";
+import { responseErrorInterceptor, requestInterceptor, ariesRequestInterceptor } from "../interceptors";
 
 
 const ariesAxiosInstance = axios.create({
   baseURL: ariesURL
 });
 ariesAxiosInstance.interceptors.response.use(undefined, responseErrorInterceptor);
-ariesAxiosInstance.interceptors.request.use(requestInterceptor);
+ariesAxiosInstance.interceptors.request.use(ariesRequestInterceptor);
 
 
 export function getSchemaFromAries() {

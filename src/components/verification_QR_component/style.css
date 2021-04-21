@@ -1,0 +1,45 @@
+.exchange-btn{
+    margin: 50px auto;
+    height: 50px !important;
+}
+
+.btn-container{
+    display: flex;
+}
+
+
+  #tick{
+    width: 75px;
+    height: 75px;
+    z-index: 10;
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    background: #000000bf;
+    border-radius: 50%;
+  }
+  
+  .qr-hold-container {
+    width: min-content;
+    margin: auto;
+    position: relative;
+  }
+
+  .qr {
+    height: 200px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border: none;
+    background-color: "transparent";
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .qrImage {
+    position: relative;
+    top: 0;
+    height: 99.99%;
+    margin: auto;
+  }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { apiUrl, ariesURL, connectionsEndpoint, isProduction } from "../../constants";
-import { responseErrorInterceptor, requestInterceptor } from "../interceptors";
+import { responseErrorInterceptor, requestInterceptor, ariesRequestInterceptor } from "../interceptors";
 
 const axiosInstance = axios.create({
   baseURL: apiUrl,
@@ -10,10 +10,10 @@ axiosInstance.interceptors.response.use(undefined, responseErrorInterceptor);
 axiosInstance.interceptors.request.use(requestInterceptor);
 
 const ariesAxiosInstance = axios.create({
-  baseURL: apiUrl,
+  baseURL: ariesURL,
 });
 ariesAxiosInstance.interceptors.response.use(undefined, responseErrorInterceptor);
-ariesAxiosInstance.interceptors.request.use(requestInterceptor);
+ariesAxiosInstance.interceptors.request.use(ariesRequestInterceptor);
 
 
 const connectionEndpointInstance = axios.create({
