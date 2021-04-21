@@ -7,11 +7,13 @@ import AdminLayoutComponent from "../shared/admin-layout";
 import "./main-style.css";
 import {getPatientConnections} from "../../actions/patient";
 import ConnectionTable from "../connection_table/ConnectionTable"
+import VerificationQR from "../verification_QR_component/VerificationQR";
 
 export default class DashboradWrapperComponent extends React.Component {
-    state = { showAddPatientVisible: false, showIssueCertificateVisible: false };
+    state = { showAddPatientVisible: false, showIssueCertificateVisible: false, refreshTable: false };
 
-    showAddPatientDrawer = () => {
+    refreshTable = () => this.setState({refreshTable: !this.state.refreshTable})
+    /* showAddPatientDrawer = () => {
         this.setState({
             showAddPatientVisible: true,
         });
@@ -21,7 +23,7 @@ export default class DashboradWrapperComponent extends React.Component {
         this.setState({
             showIssueCertificateVisible: true,
         });
-    };
+    }; */
 
     onClose = () => {
         this.setState({
@@ -38,7 +40,7 @@ export default class DashboradWrapperComponent extends React.Component {
     render() {
         return (
             <AdminLayoutComponent props={this.props}>
-                <Drawer
+                {/* <Drawer
                     title="Issue Credentials"
                     className="custom-drawer"
                     onClose={this.onClose}
@@ -47,9 +49,12 @@ export default class DashboradWrapperComponent extends React.Component {
                     destroyOnClose={true}
                 >
                     <IssueCertificate onCancel={this.onClose} />
-                </Drawer>
+                </Drawer> */}
                 <div className="map-container site-layout-background">
+                    <VerificationQR refreshVerificationTable = {this.refreshTable} />
                     <ConnectionTable
+                        refreshPrompt = {this.state.refreshTable}
+                        refreshVerificationTable = {this.refreshTable} 
                         props={this.props}
                         style={{ position: "relative" }}
                     />

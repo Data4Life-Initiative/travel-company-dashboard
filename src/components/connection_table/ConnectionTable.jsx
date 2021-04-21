@@ -1,9 +1,40 @@
-import React, { useEffect, Fragment } from "react";
+import React from "react";
 import { Table, Modal, Tooltip } from "antd";
 import { CheckCircleOutlined, CloseCircleOutlined, EyeOutlined } from '@ant-design/icons';
+import {
+  fetchVerificatiorRecordUrl,
+  apiKey
+} from "../../constants";
+import axios from "axios";
 
 export default class ConnectionTable extends React.Component {
-  state = { visible: false };
+  
+  componentDidMount() {
+    this.FertchVerificationRecord()
+  }
+  
+  state = { 
+    visible: false ,
+    verificationRecord: []
+  };
+
+  FertchVerificationRecord = async () => {
+      const url = fetchVerificatiorRecordUrl;
+      const axiosConfig = {
+        headers: {
+          Authorization: apiKey,
+        },
+      };
+      try {
+        const response = await axios.get(url, axiosConfig);
+        const data = response.data.results;
+        this.setState({verificationRecord: data})
+      } catch (error) {
+        this.setState({verificationRecord: []})
+      }
+  };
+
+  
 
   showModal = () => {
     this.setState({
@@ -12,14 +43,12 @@ export default class ConnectionTable extends React.Component {
   };
 
   handleOk = e => {
-    console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false,
       rawJson: {}
@@ -27,64 +56,60 @@ export default class ConnectionTable extends React.Component {
   };
 
   render() {
-    const {connections=[], proofRecords={}} = this.props.props.patient;
-    const dataSource = Object.keys(proofRecords).map(key => { return {'ConnectionID': key} });
-
+    if(this.props.refreshPrompt){
+      this.FertchVerificationRecord()
+      this.props.refreshVerificationTable() 
+    } 
     const columns = [
       {
         title: 'Shared by',
-        dataIndex: 'ConnectionID',
-        key: 'ConnectionID',
+        dataIndex: 'presentation_proposal_dict',
+        key: 'Shared by',
         render: (value) => {
-          const connectionID = proofRecords[value]['connectionID']
-          const temp = connections.filter(agent => agent.ConnectionID === connectionID);
-          if (temp.length > 0){
-            return temp[0].Name
-          }
-          return 'Unknown';
+          let cellValue = ''
+          value.presentation_proposal.attributes.forEach(attr => {
+            if (attr.name === 'Name') cellValue = attr.value
+          })
+          return cellValue
         },
       },
       {
         title: 'Test Date',
-        dataIndex: 'ConnectionID',
-        key: 'testDate',
+        dataIndex: 'presentation_proposal_dict',
+        key: 'Test Date',
         render: (value) => {
-          if(proofRecords[value]){
-            return proofRecords[value]['testDate']
-          }
-          return 'Unknown';
+          let cellValue = ''
+          value.presentation_proposal.attributes.forEach(attr => {
+            if (attr.name === 'TestDate') cellValue = attr.value
+          })
+          return cellValue
         },
       },
       {
         title: 'Test Result',
-        dataIndex: 'ConnectionID',
-        key: 'testResult',
+        dataIndex: 'presentation_proposal_dict',
+        key: 'Test Result',
         render: (value) => {
-          if(proofRecords[value]){
-            return proofRecords[value]['testResults']
-          }
-          return 'Unknown';
+          let cellValue = ''
+          value.presentation_proposal.attributes.forEach(attr => {
+            if (attr.name === 'TestResult') cellValue = attr.value
+          })
+          return cellValue
         },
       },
       {
         title: 'Collection Date',
-        dataIndex: 'ConnectionID',
-        key: 'collectionDate',
+        dataIndex: 'updated_at',
+        key: 'updated_at',
         render: (value) => {
-          if(proofRecords[value]){
-            const date = new Date(proofRecords[value]['collectionDate']);
+            const date = new Date(value);
             return date.toLocaleString();
-          }
-          return 'Unknown';
         },
         sorter: {
           compare: (a, b) => {
-            if(proofRecords[a.ConnectionID] && proofRecords[b.ConnectionID]){
-              const dateA = new Date(proofRecords[a.ConnectionID]['collectionDate']);
-              const dateB = new Date(proofRecords[b.ConnectionID]['collectionDate']);
-              return dateA - dateB;
-            }
-            return true;
+            const dateA = new Date(a.updated_at);
+            const dateB = new Date(b.updated_at);
+            return dateA - dateB
           },
           multiple: 3,
         },
@@ -92,10 +117,10 @@ export default class ConnectionTable extends React.Component {
       },
       {
         title: 'State',
-        dataIndex: 'ConnectionID',
+        dataIndex: 'state',
         key: 'state',
         render: (value) => {
-          if(proofRecords[value]['state'] === 'verified'){
+          if(value === 'verified'){
             return <Tooltip title="Verified"><CheckCircleOutlined style={{ color: 'green'}}/></Tooltip>
           }
           else{
@@ -105,18 +130,18 @@ export default class ConnectionTable extends React.Component {
       },
       {
         title: '',
-        dataIndex: 'ConnectionID',
-        key: 'raw_value',
+        dataIndex: '',
+        key: 'connection_id',
         render: (value) => {
           return <EyeOutlined  onClick={() => this.setState({
-            rawJson: proofRecords[value]['rawInfo'] || {},
+            rawJson: value || {},
             visible: true
           })}/>;
         },
       },
     ];
     return (<div>
-      <Table dataSource={dataSource} columns={columns}/>
+      <Table dataSource={this.state.verificationRecord} columns={columns}/>
       <Modal
           title="Raw JSON"
           visible={this.state.visible}
